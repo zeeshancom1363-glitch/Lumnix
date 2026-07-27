@@ -1,0 +1,136 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import { services } from '../data/services.js';
+---
+
+<Layout title="Contact Us in Dubai | Luminex Star Technical Services" description="Get in touch with Luminex Star for a free site visit and quotation. Call, WhatsApp, or fill out the form. Licensed technical services across Dubai.">
+  <section class="bg-charcoal py-20 md:py-28">
+    <div class="container text-center">
+      <h1 class="text-white mb-4">Contact Us</h1>
+      <p class="text-white/70 text-lg max-w-2xl mx-auto">Request a free site visit, get a quotation, or ask us anything. We respond within two hours during business hours.</p>
+    </div>
+  </section>
+
+  <section class="py-16 md:py-24">
+    <div class="container">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+
+        <!-- Contact Form -->
+        <div class="fade-rise pb-24 md:pb-0">
+          <span class="gold-rule"></span>
+          <h2 class="mt-4 mb-8">Send Us a Message</h2>
+          <form
+            action="https://api.web3forms.com/submit"
+            method="POST"
+            id="contact-form"
+            class="space-y-5"
+          >
+            <!-- Web3Forms access key — loaded from .env in production -->
+            <input type="hidden" name="access_key" value={import.meta.env.PUBLIC_WEB3FORMS_KEY || ''} />
+            <input type="hidden" name="redirect" value="/thank-you" />
+
+            <!-- Honeypot -->
+            <input type="checkbox" name="botcheck" class="hidden" style="display:none" tabindex="-1" autocomplete="off" />
+
+            <div>
+              <label for="name" class="block text-sm font-medium text-ink mb-1.5">Full Name <span class="text-gold">*</span></label>
+              <input type="text" name="name" id="name" required class="w-full px-4 py-3 border border-line rounded-lg bg-bg text-ink text-sm focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold transition-colors" placeholder="Your full name" />
+            </div>
+
+            <div>
+              <label for="email" class="block text-sm font-medium text-ink mb-1.5">Email <span class="text-gold">*</span></label>
+              <input type="email" name="email" id="email" required class="w-full px-4 py-3 border border-line rounded-lg bg-bg text-ink text-sm focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold transition-colors" placeholder="you@example.com" />
+            </div>
+
+            <div>
+              <label for="phone" class="block text-sm font-medium text-ink mb-1.5">Phone <span class="text-gold">*</span></label>
+              <input type="tel" name="phone" id="phone" required class="w-full px-4 py-3 border border-line rounded-lg bg-bg text-ink text-sm focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold transition-colors" placeholder="+971 55 XXX XXXX" />
+            </div>
+
+            <div>
+              <label for="service" class="block text-sm font-medium text-ink mb-1.5">Service</label>
+              <select name="service" id="service" class="w-full px-4 py-3 border border-line rounded-lg bg-bg text-ink text-sm focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold transition-colors">
+                <option value="">Select a service (optional)</option>
+                {services.map(s => (
+                  <option value={s.title}>{s.title}</option>
+                ))}
+              </select>
+            </div>
+
+            <div>
+              <label for="message" class="block text-sm font-medium text-ink mb-1.5">Message <span class="text-gold">*</span></label>
+              <textarea name="message" id="message" rows="4" required class="w-full px-4 py-3 border border-line rounded-lg bg-bg text-ink text-sm focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold transition-colors resize-y" placeholder="Tell us about your project or request..."></textarea>
+            </div>
+
+            <button type="submit" id="submit-btn" class="inline-flex items-center justify-center gap-2 px-8 py-3 bg-gold text-ink font-display font-semibold text-sm rounded-lg hover:bg-gold-soft transition-colors disabled:opacity-50 disabled:cursor-not-allowed w-full sm:w-auto">
+              Request a Free Site Visit
+            </button>
+
+            <div id="form-status" aria-live="polite" class="text-sm"></div>
+          </form>
+        </div>
+
+        <!-- Contact Info -->
+        <div class="fade-rise">
+          <span class="gold-rule"></span>
+          <h2 class="mt-4 mb-8">Get in Touch</h2>
+
+          <div class="space-y-6">
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-lg bg-gold/10 flex items-center justify-center flex-shrink-0">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C9A227" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              </div>
+              <div>
+                <h3 class="font-display font-semibold text-ink mb-1">Phone</h3>
+                <a href="tel:+971555855033" class="text-slate hover:text-gold transition-colors">+971 55 585 5033</a>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-lg bg-whatsapp/10 flex items-center justify-center flex-shrink-0">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#25D366" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+              </div>
+              <div>
+                <h3 class="font-display font-semibold text-ink mb-1">WhatsApp</h3>
+                <a href="https://wa.me/971557782644?text=Hi%2C%20I%27d%20like%20a%20quote%20for%20" target="_blank" rel="noopener noreferrer" class="text-slate hover:text-gold transition-colors">+971 55 778 2644</a>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-lg bg-gold/10 flex items-center justify-center flex-shrink-0">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C9A227" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+              </div>
+              <div>
+                <h3 class="font-display font-semibold text-ink mb-1">Email</h3>
+                <a href="mailto:info@luminexstar.ae" class="text-slate hover:text-gold transition-colors">info@luminexstar.ae</a>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-lg bg-gold/10 flex items-center justify-center flex-shrink-0">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C9A227" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+              </div>
+              <div>
+                <h3 class="font-display font-semibold text-ink mb-1">Location</h3>
+                <p class="text-slate">Dubai, United Arab Emirates</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement;
+  const btn = document.getElementById('submit-btn') as HTMLButtonElement;
+  const status = document.getElementById('form-status') as HTMLDivElement;
+
+  form?.addEventListener('submit', () => {
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+    status.textContent = '';
+  });
+</script>

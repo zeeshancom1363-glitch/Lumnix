@@ -1,0 +1,28 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import SectionHeading from '../../components/SectionHeading.astro';
+import ServiceCard from '../../components/ServiceCard.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { services } from '../../data/services.js';
+---
+
+<Layout title="Our Services in Dubai | Luminex Star Technical Services" description="Explore our 10 licensed technical services in Dubai — carpentry, plumbing, HVAC, tiling, glass & aluminium, electrical, and more. All trades under one roof.">
+  <section class="bg-charcoal py-20 md:py-28">
+    <div class="container text-center">
+      <h1 class="text-white mb-4">Our Services</h1>
+      <p class="text-white/70 text-lg max-w-2xl mx-auto">Ten licensed trades delivered by one multi-trade in-house team. From minor repairs to complete fit-outs across Dubai.</p>
+    </div>
+  </section>
+
+  <section class="bg-bg-alt py-16 md:py-24">
+    <div class="container">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        {services.map(s => (
+          <ServiceCard title={s.title} slug={s.slug} description={s.description} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CtaBand />
+</Layout>

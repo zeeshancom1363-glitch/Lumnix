@@ -1,0 +1,15 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Button from '../components/Button.astro';
+---
+
+<Layout title="Page Not Found | Luminex Star Technical Services" description="The page you are looking for does not exist." noindex={true}>
+  <section class="py-24 md:py-32">
+    <div class="container text-center max-w-xl mx-auto">
+      <p class="text-gold font-display font-bold text-7xl md:text-9xl mb-4">404</p>
+      <h1 class="mb-4">Page Not Found</h1>
+      <p class="text-slate text-lg mb-8">The page you are looking for does not exist or may have been moved.</p>
+      <Button href="/">Return to Home</Button>
+    </div>
+  </section>
+</Layout>

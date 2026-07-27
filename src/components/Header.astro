@@ -1,0 +1,105 @@
+---
+import { services } from '../data/services.js';
+
+const navLinks = [
+  { href: '/', label: 'Home' },
+  { href: '/about', label: 'About' },
+  { href: '/services', label: 'Services' },
+  { href: '/projects', label: 'Projects' },
+  { href: '/contact', label: 'Contact' },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<header class="sticky top-0 z-50 bg-charcoal shadow-sm">
+  <div class="container flex items-center justify-between h-16 md:h-20">
+    <!-- LOGO: replace with SVG -->
+    <a href="/" class="flex flex-col leading-tight group" aria-label="Luminex Star — Home">
+      <span class="text-white font-display font-bold text-lg md:text-xl tracking-wide group-hover:text-gold-soft">LUMINEX STAR</span>
+      <span class="text-slate text-[0.6rem] md:text-xs font-body font-medium tracking-[0.18em]">TECHNICAL SERVICES L.L.C</span>
+    </a>
+
+    <!-- Desktop nav -->
+    <nav class="hidden md:flex items-center gap-8" aria-label="Main navigation">
+      {navLinks.map(link => (
+        <a
+          href={link.href}
+          class:list={[
+            'text-sm font-display font-semibold tracking-wide uppercase transition-colors',
+            currentPath === link.href ? 'text-gold' : 'text-white/80 hover:text-gold-soft'
+          ]}
+        >
+          {link.label}
+        </a>
+      ))}
+      <a
+        href="/contact"
+        class="inline-flex items-center px-5 py-2.5 bg-gold text-ink text-sm font-display font-semibold rounded-lg hover:bg-gold-soft transition-colors"
+      >
+        Get a Free Quote
+      </a>
+    </nav>
+
+    <!-- Mobile hamburger -->
+    <button
+      id="mobile-menu-btn"
+      class="md:hidden flex flex-col justify-center items-center w-11 h-11 gap-1.5 text-white"
+      aria-label="Toggle navigation menu"
+      aria-expanded="false"
+    >
+      <span class="hamburger-line w-6 h-0.5 bg-current transition-all duration-300 origin-center"></span>
+      <span class="hamburger-line w-6 h-0.5 bg-current transition-all duration-300 origin-center"></span>
+      <span class="hamburger-line w-6 h-0.5 bg-current transition-all duration-300 origin-center"></span>
+    </button>
+  </div>
+
+  <!-- Mobile nav -->
+  <nav
+    id="mobile-menu"
+    class="md:hidden hidden bg-charcoal border-t border-white/10"
+    aria-label="Mobile navigation"
+  >
+    <div class="container py-4 flex flex-col gap-1">
+      {navLinks.map(link => (
+        <a
+          href={link.href}
+          class:list={[
+            'py-3 px-4 text-sm font-display font-semibold tracking-wide uppercase rounded-lg transition-colors',
+            currentPath === link.href ? 'text-gold bg-white/5' : 'text-white/80 hover:text-gold-soft hover:bg-white/5'
+          ]}
+        >
+          {link.label}
+        </a>
+      ))}
+      <a
+        href="/contact"
+        class="mt-2 inline-flex items-center justify-center px-5 py-3 bg-gold text-ink text-sm font-display font-semibold rounded-lg hover:bg-gold-soft transition-colors"
+      >
+        Get a Free Quote
+      </a>
+    </div>
+  </nav>
+</header>
+
+<script>
+  const btn = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
+
+  btn?.addEventListener('click', () => {
+    const isOpen = menu?.classList.toggle('hidden') === false;
+    btn.setAttribute('aria-expanded', String(isOpen));
+
+    // Animate hamburger to X
+    const lines = btn.querySelectorAll('.hamburger-line');
+    if (isOpen) {
+      lines[0]?.classList.add('rotate-45', 'translate-y-[4px]');
+      lines[1]?.classList.add('opacity-0');
+      lines[2]?.classList.add('-rotate-45', '-translate-y-[4px]');
+    } else {
+      lines[0]?.classList.remove('rotate-45', 'translate-y-[4px]');
+      lines[1]?.classList.remove('opacity-0');
+      lines[2]?.classList.remove('-rotate-45', '-translate-y-[4px]');
+    }
+  });
+</script>

@@ -1,0 +1,186 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Button from '../../components/Button.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { services } from '../../data/services.js';
+import { images } from '../../data/images.js';
+
+export function getStaticPaths() {
+  return services.map(s => ({
+    params: { slug: s.slug },
+    props: { service: s },
+  }));
+}
+
+const { service } = Astro.props;
+const serviceImages = images.services[service.slug] || [];
+
+const serviceDetails: Record<string, string[]> = {
+  'carpentry-wood-flooring': [
+    'Hardwood and engineered wood floor installation',
+    'Custom cabinetry, shelving, and built-in units',
+    'Door and window frame repairs and replacements',
+    'Timber cladding and panelling',
+    'Wood floor sanding, staining, and refinishing',
+    'Bespoke furniture and joinery',
+  ],
+  'building-cleaning': [
+    'Post-construction deep cleaning',
+    'Facade and glass curtain wall cleaning',
+    'High-pressure washing for parking areas and walkways',
+    'Regular building maintenance cleaning',
+    'Tank and duct sanitisation',
+    'Move-in and move-out cleaning',
+  ],
+  'glass-aluminium': [
+    'Aluminium door and window installation',
+    'Glass partition walls for offices and retail',
+    'Shower enclosures and glass railings',
+    'Aluminium curtain wall systems',
+    'Glass replacement and repair',
+    'Sliding and folding door systems',
+  ],
+  'hvac-ventilation': [
+    'Split and ducted AC installation',
+    'AC repair, gas top-up, and servicing',
+    'Duct cleaning and sanitisation',
+    'Fresh air ventilation system installation',
+    'Air filtration and purification systems',
+    'Chiller and package unit maintenance',
+  ],
+  'electromechanical': [
+    'Electrical wiring and panel board installation',
+    'Motor control and automation systems',
+    'Generator installation and maintenance',
+    'Fire alarm and suppression system wiring',
+    'Low-voltage system installation',
+    'Preventive maintenance contracts',
+  ],
+  'plaster-works': [
+    'Interior wall and ceiling plastering',
+    'External render and stucco finishes',
+    'Skim coating over existing surfaces',
+    'Decorative plaster mouldings and cornices',
+    'Crack repair and surface preparation',
+    'Fireproof and thermal plaster applications',
+  ],
+  'floor-wall-tiling': [
+    'Ceramic and porcelain tile installation',
+    'Natural stone (marble, granite, travertine) tiling',
+    'Mosaic and feature wall installations',
+    'Wet room and bathroom waterproofing and tiling',
+    'Tile repair, re-grouting, and polishing',
+    'Outdoor and balcony tiling',
+  ],
+  'sanitary-pipe-repairs': [
+    'Pipe leak detection and repair',
+    'Drain clearing and jetting',
+    'Pipe replacement (PVC, copper, PPR)',
+    'Sanitary ware repair and replacement',
+    'Water heater maintenance and repair',
+    'Emergency pipe burst response',
+  ],
+  'plumbing-sanitary': [
+    'Complete bathroom and kitchen plumbing installation',
+    'Water supply and drainage system setup',
+    'Sanitary ware supply and fitting',
+    'Water heater and pump installation',
+    'Underground and concealed piping',
+    'Water tank installation and plumbing connections',
+  ],
+  'false-ceiling-partitions': [
+    'Gypsum board false ceiling installation',
+    'Mineral fibre and metal tile ceilings',
+    'Light steel frame partitions',
+    'Drywall partition installation',
+    'Access panels and hatches',
+    'Bulkhead and cove lighting recesses',
+  ],
+};
+
+const included = serviceDetails[service.slug] || [];
+const areas = ['Business Bay', 'JLT', 'Deira', 'Al Quoz', 'Dubai Marina', 'Jumeirah', 'DIP'];
+---
+
+<Layout
+  title={`${service.title} in Dubai | Luminex Star Technical Services`}
+  description={`Professional ${service.title.toLowerCase()} in Dubai. Licensed by DET, fully insured, free site visits. Call Luminex Star for a fixed-price quotation.`}
+>
+  <!-- Breadcrumb -->
+  <nav class="bg-bg-alt py-3 border-b border-line" aria-label="Breadcrumb">
+    <div class="container">
+      <ol class="flex items-center gap-2 text-sm text-slate">
+        <li><a href="/" class="hover:text-gold transition-colors">Home</a></li>
+        <li class="text-line">/</li>
+        <li><a href="/services" class="hover:text-gold transition-colors">Services</a></li>
+        <li class="text-line">/</li>
+        <li class="text-ink font-medium">{service.title}</li>
+      </ol>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="bg-charcoal py-16 md:py-24">
+    <div class="container">
+      <span class="gold-rule"></span>
+      <h1 class="text-white mt-4">{service.title} in Dubai</h1>
+      <p class="text-white/70 text-lg mt-4 max-w-2xl">{service.description}</p>
+    </div>
+  </section>
+
+  <!-- What's Included -->
+  <section class="py-16 md:py-24">
+    <div class="container fade-rise">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div>
+          <span class="gold-rule"></span>
+          <h2 class="mt-4 mb-6">What's Included</h2>
+          <ul class="space-y-3">
+            {included.map(item => (
+              <li class="flex items-start gap-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C9A227" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-0.5"><path d="M20 6 9 17l-5-5"/></svg>
+                <span class="text-ink">{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div>
+          <span class="gold-rule"></span>
+          <h2 class="mt-4 mb-6">Where We Work</h2>
+          <div class="flex flex-wrap gap-2">
+            {areas.map(area => (
+              <span class="px-4 py-2 bg-bg-alt text-ink text-sm rounded-lg border border-line">{area}</span>
+            ))}
+          </div>
+
+          <!-- Photo Grid -->
+          <div class="grid grid-cols-3 gap-3 mt-8">
+            {serviceImages.map((src: string, i: number) => (
+              <div class="aspect-[4/3] rounded-lg overflow-hidden">
+                <img src={src} alt={`${service.title} project in Dubai — photo ${i + 1}`} width="800" height="600" loading="lazy" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <CtaBand />
+
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": service.title,
+    "provider": {
+      "@type": "LocalBusiness",
+      "name": "Luminex Star Technical Services L.L.C",
+      "telephone": "+971555855033",
+      "address": { "@type": "PostalAddress", "addressLocality": "Dubai", "addressCountry": "AE" }
+    },
+    "areaServed": "Dubai, United Arab Emirates",
+    "description": service.description
+  })} />
+</Layout>

@@ -1,0 +1,32 @@
+---
+interface Props {
+  variant?: 'primary' | 'secondary' | 'whatsapp';
+  href?: string;
+  type?: 'button' | 'submit';
+  class?: string;
+}
+
+const { variant = 'primary', href, type, class: className } = Astro.props;
+
+const baseClasses = 'inline-flex items-center justify-center gap-2 px-6 py-3 font-display font-semibold text-sm rounded-lg transition-colors focus-visible:outline-2 focus-visible:outline-gold focus-visible:outline-offset-2';
+
+const variantClasses = {
+  primary: 'bg-gold text-ink hover:bg-gold-soft',
+  secondary: 'border-2 border-gold text-gold hover:bg-gold hover:text-ink',
+  whatsapp: 'bg-whatsapp text-white hover:bg-whatsapp/90',
+};
+
+const classes = `${baseClasses} ${variantClasses[variant]} ${className ?? ''}`;
+
+const Tag = href ? 'a' : 'button';
+---
+
+{href ? (
+  <a href={href} class={classes} target={variant === 'whatsapp' ? '_blank' : undefined} rel={variant === 'whatsapp' ? 'noopener noreferrer' : undefined}>
+    <slot />
+  </a>
+) : (
+  <button type={type ?? 'button'} class={classes}>
+    <slot />
+  </button>
+)}

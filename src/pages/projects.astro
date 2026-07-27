@@ -1,0 +1,29 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { images } from '../data/images.js';
+---
+
+<Layout title="Our Projects in Dubai | Luminex Star Technical Services" description="Browse completed projects by Luminex Star Technical Services across Dubai — commercial fit-outs, villa renovations, plumbing, HVAC, tiling, and more.">
+  <section class="bg-charcoal py-20 md:py-28">
+    <div class="container text-center">
+      <h1 class="text-white mb-4">Our Projects</h1>
+      <p class="text-white/70 text-lg max-w-2xl mx-auto">A selection of completed work across Dubai — from office fit-outs and villa renovations to building maintenance projects.</p>
+    </div>
+  </section>
+
+  <section class="py-16 md:py-24">
+    <div class="container fade-rise">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        {images.projects.map((img) => (
+          <div class="group aspect-[9/7] rounded-lg overflow-hidden">
+            <img src={img.src} alt={img.alt} width={img.w} height={img.h} loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CtaBand />
+</Layout>
